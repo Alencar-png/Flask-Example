@@ -1,7 +1,3 @@
-Segue o README atualizado para um projeto Flask utilizando MySQL:
-
----
-
 # Flask Example
 
 Este é um exemplo de API construída com [Flask](https://flask.palletsprojects.com/) que utiliza [Alembic](https://alembic.sqlalchemy.org/) para gerenciar as migrações do banco de dados.
