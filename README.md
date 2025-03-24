@@ -1,13 +1,15 @@
 # Flask Example
 
-Este é um exemplo de API construída com [Flask](https://flask.palletsprojects.com/) que utiliza [Alembic](https://alembic.sqlalchemy.org/) para gerenciar as migrações do banco de dados.
+Este é um exemplo de API construída com [Flask](https://flask.palletsprojects.com/) que utiliza [Alembic](https://alembic.sqlalchemy.org/) para gerenciar as migrações do banco de dados. A documentação interativa da API é servida via Swagger UI, com a especificação centralizada no arquivo `docs/swagger.yaml`.
 
 ## Sumário
 
 - [Pré-requisitos](#pré-requisitos)
 - [Instalação](#instalação)
 - [Executando a API](#executando-a-api)
+- [Documentação da API](#documentação-da-api)
 - [Migrações com Alembic](#migrações-com-alembic)
+- [Atualizando a Documentação](#atualizando-a-documentação)
 - [Contribuição](#contribuição)
 - [Licença](#licença)
 
@@ -43,20 +45,39 @@ Este é um exemplo de API construída com [Flask](https://flask.palletsprojects.
 
 ## Executando a API
 
-Para iniciar o servidor Flask em ambiente de desenvolvimento, execute:
+Antes de iniciar o servidor, defina a variável de ambiente `FLASK_APP` conforme seu sistema operacional:
 
-```bash
-flask run
-```
+- **No Linux/macOS:**
 
-Caso queira rodar com modo de debug, defina a variável de ambiente:
+  ```bash
+  export FLASK_APP=main.py
+  flask run
+  ```
 
-```bash
-export FLASK_ENV=development  # Linux/macOS
-set FLASK_ENV=development     # Windows
-```
+- **No Windows (cmd):**
+
+  ```bash
+  set FLASK_APP=main.py
+  flask run
+  ```
+
+- **No Windows (PowerShell):**
+
+  ```powershell
+  $env:FLASK_APP = "main.py"
+  flask run
+  ```
 
 A API estará disponível em [http://127.0.0.1:5000](http://127.0.0.1:5000).
+
+## Documentação da API
+
+A documentação interativa da API pode ser acessada em:
+
+- **Swagger UI:** [http://127.0.0.1:5000/apidocs](http://127.0.0.1:5000/apidocs)
+- **Especificação OpenAPI:** [http://127.0.0.1:5000/openapi.yaml](http://127.0.0.1:5000/openapi.yaml)
+
+Essas rotas estão organizadas em um blueprint dedicado, localizado na pasta `routers` (arquivo `routers/docs.py`).
 
 ## Migrações com Alembic
 
@@ -100,6 +121,18 @@ alembic downgrade -1
 
 Este comando reverte a última migração, retornando o banco de dados ao estado anterior.
 
+## Atualizando a Documentação
+
+Para manter a documentação da API atualizada:
+
+1. **Ao criar um novo módulo (novo blueprint ou rotas):**
+   - Atualize o arquivo `docs/swagger.yaml` para incluir as novas rotas, parâmetros e respostas.  
+   - Utilize a [especificação OpenAPI](https://swagger.io/specification/) como referência para definir os novos endpoints e modelos.
+
+2. **Após atualizar a especificação:**
+   - Reinicie o servidor para que a nova documentação seja carregada.
+   - Verifique a documentação interativa em [http://127.0.0.1:5000/apidocs](http://127.0.0.1:5000/apidocs).
+
 ## Contribuição
 
 Contribuições são bem-vindas! Se você deseja ajudar a melhorar o projeto, por favor:
@@ -114,4 +147,4 @@ Contribuições são bem-vindas! Se você deseja ajudar a melhorar o projeto, po
 
 Este projeto está licenciado sob a [MIT License](LICENSE).
 
----
+--- 
